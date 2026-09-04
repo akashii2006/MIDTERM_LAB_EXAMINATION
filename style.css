@@ -1,0 +1,679 @@
+/*
+========================================
+PORTFOLIO WEBSITE STYLESHEET - FIXED
+CCS114 - Web Technologies Laboratory Exam
+========================================
+*/
+
+/*
+CSS Custom Properties - Source: https://developer.mozilla.org/en-US/docs/Web/CSS/--*
+*/
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #8b5cf6;
+    --accent-color: #06b6d4;
+    --dark-bg: #0f172a;
+    --card-bg: #1e293b;
+    --text-light: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*
+Typography - Source: https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
+*/
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a2e 100%);
+    color: var(--text-light);
+    overflow-x: hidden;
+}
+
+/*
+Custom Scrollbar - Source: https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp
+*/
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+/*
+========================================
+NAVIGATION STYLES
+========================================
+*/
+
+.navbar {
+    background: rgba(15, 23, 42, 0.95) !important;
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    padding: 10px 0;
+    box-shadow: 0 4px 30px rgba(99, 102, 241, 0.2);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    font-weight: 500;
+    margin: 0 10px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+/*
+========================================
+HERO SECTION STYLES
+========================================
+*/
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 0;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    z-index: 0;
+}
+
+/*
+CSS Animation Keyframes - Source: https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
+*/
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    opacity: 0.1;
+    animation: float 20s infinite ease-in-out;
+}
+
+.shape:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    width: 80px;
+    height: 80px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation-delay: 0s;
+}
+
+.shape:nth-child(2) {
+    top: 60%;
+    right: 10%;
+    width: 120px;
+    height: 120px;
+    background: var(--accent-color);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation-delay: 5s;
+}
+
+.shape:nth-child(3) {
+    bottom: 20%;
+    left: 30%;
+    width: 60px;
+    height: 60px;
+    background: var(--secondary-color);
+    transform: rotate(45deg);
+    animation-delay: 10s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-30px) rotate(120deg); }
+    66% { transform: translateY(30px) rotate(240deg); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--text-light), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 1s ease;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    animation: fadeInUp 1s ease 0.2s both;
+}
+
+.hero-badges {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 1s ease 0.4s both;
+}
+
+.badge-custom {
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.badge-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.btn-hero {
+    margin-top: 30px;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1s ease 0.6s both;
+}
+
+.btn-hero:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*
+========================================
+SECTION STYLES
+========================================
+*/
+
+section {
+    padding: 100px 0;
+    position: relative;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 60px;
+    background: linear-gradient(135deg, var(--text-light), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/*
+========================================
+ABOUT SECTION STYLES
+========================================
+*/
+
+.about-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    transition: all 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-color);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+}
+
+.about-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/*
+Progress Bar Custom Styles
+Source: Bootstrap 5 Progress - https://getbootstrap.com/docs/5.3/components/progress/
+Modified: Custom gradient styling
+*/
+.skill-item {
+    margin-bottom: 20px;
+}
+
+.skill-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.progress {
+    height: 10px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 10px;
+    transition: width 1.5s ease;
+}
+
+/*
+========================================
+GALLERY SECTION STYLES
+========================================
+*/
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(99, 102, 241, 0.9), transparent);
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/*
+========================================
+MISSION/VISION SECTION STYLES - FIXED
+========================================
+*/
+
+.mv-section {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
+}
+
+.mv-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 40px;
+    height: 100%;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    transition: all 0.3s ease;
+    color: var(--text-light) !important; /* FIXED: Ensure text is visible */
+}
+
+.mv-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-color);
+}
+
+.mv-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* FIXED: Mission/Vision text colors */
+.mv-card h3 {
+    color: var(--text-light) !important;
+}
+
+.mv-card .lead {
+    color: var(--text-light) !important;
+}
+
+.mv-card p {
+    color: var(--text-muted) !important;
+}
+
+.mv-card .text-muted {
+    color: #cbd5e1 !important; /* Lighter gray for better contrast */
+}
+
+/* Mission list items - FIXED */
+.mv-card li {
+    color: var(--text-light) !important;
+}
+
+/*
+========================================
+CONTACT SECTION STYLES - FIXED
+========================================
+*/
+
+.contact-form {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 50px;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* FIXED: Contact card text colors */
+.about-card h4,
+.about-card h6,
+.about-card p {
+    color: var(--text-light) !important;
+}
+
+/* FIXED: Contact info text */
+.about-card .text-muted {
+    color: #cbd5e1 !important; /* Lighter gray for better contrast */
+}
+
+/* FIXED: Ensure all text in contact section is visible */
+#contact .about-card p,
+#contact .about-card h6,
+#contact .mv-icon + div p {
+    color: var(--text-light) !important;
+}
+
+.form-control {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: var(--text-light);
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--primary-color);
+    color: var(--text-light);
+    box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.form-label {
+    color: var(--text-light);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* FIXED: Select dropdown text */
+.form-select {
+    background-color: rgba(255,255,255,0.05);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: var(--text-light);
+}
+
+.form-select option {
+    background-color: var(--card-bg);
+    color: var(--text-light);
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+}
+
+/*
+========================================
+ALERT CUSTOM STYLES
+========================================
+*/
+
+.alert-custom {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.2));
+    border: 1px solid var(--primary-color);
+    color: var(--text-light);
+    border-radius: 15px;
+}
+
+/*
+========================================
+ACCORDION CUSTOM STYLES
+========================================
+*/
+
+.accordion-item {
+    background: var(--card-bg);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    margin-bottom: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.accordion-button {
+    background: var(--card-bg);
+    color: var(--text-light);
+    font-weight: 600;
+    padding: 20px;
+}
+
+.accordion-button:not(.collapsed) {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.2));
+    color: var(--text-light);
+}
+
+.accordion-button::after {
+    filter: invert(1);
+}
+
+.accordion-body {
+    color: var(--text-light);
+}
+
+/*
+========================================
+MODAL CUSTOM STYLES
+========================================
+*/
+
+.modal-content {
+    background: var(--card-bg);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 20px;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+/* FIXED: Modal text colors */
+.modal-body p,
+.modal-body h4 {
+    color: var(--text-light);
+}
+
+/*
+========================================
+FOOTER STYLES
+========================================
+*/
+
+footer {
+    background: rgba(15, 23, 42, 0.95);
+    padding: 30px 0;
+    text-align: center;
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+footer p {
+    color: var(--text-light);
+}
+
+footer .text-muted {
+    color: #94a3b8 !important;
+}
+
+/*
+========================================
+CAROUSEL CUSTOM STYLES
+========================================
+*/
+
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background: rgba(99, 102, 241, 0.8);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/*
+========================================
+RESPONSIVE STYLES
+Source: https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries
+========================================
+*/
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+/*
+========================================
+SCROLL ANIMATION STYLES
+========================================
+*/
+
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
